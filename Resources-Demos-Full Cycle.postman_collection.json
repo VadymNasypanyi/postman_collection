@@ -1,0 +1,826 @@
+{
+	"info": {
+		"_postman_id": "972bc4ea-cd15-4eae-827b-96c12681ad8e",
+		"name": "Resources>Demos>Full Cycle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Demo's Creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88f0e774-3ca3-4139-8411-c18a3dd0284f",
+						"exec": [
+							"pm.environment.set(\"ID\", pm.response.json())",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202,200]);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"X-Powered-By is present\", function () {",
+							"    pm.response.to.have.header(\"X-Powered-By\");",
+							"});",
+							"",
+							"pm.test(\"Strict-Transport-Security is present\", function () {",
+							"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});",
+							"",
+							"pm.test(\"Server is present\", function () {",
+							"    pm.response.to.have.header(\"Server\");",
+							"});",
+							"",
+							"pm.test(\"Transfer-Encoding is present\", function () {",
+							"    pm.response.to.have.header(\"Transfer-Encoding\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 800ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e4df950d-f6b2-4ea2-a2be-3737427fda61",
+						"exec": [
+							"pm.environment.get(\"ID\");",
+							"",
+							"pm.environment.set(\"ID\", \"variable_value\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/javascript, */*; q=0.01"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=UTF-8"
+					},
+					{
+						"key": "Origin",
+						"value": "{{Origin}}"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Referer",
+						"value": "{{Referer}}"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "uk,en-US;q=0.9,en;q=0.8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"ResourceSetID\":{{ResourceSetId}},\"isNewEntity\":true,\"BuyCode\":\"{{Buy_Code}}\",\"Code\":\"{{Code}}\",\"CostCode\":\"{{Cost_Code}}\",\"Name\":\"{{Name}}\",\"EthnicityID\":12,\"ImpactFamily\":\"{{Impact_Family}}\"}&__RequestVerificationToken=mKrvwMVV2fFiTajNIWNcj1S6nk4gL_ox6DPeddItkd4uiS2TcagniTpJZ_jTEmHAsvPRK84D7hMxea0qy6GAzsWALoFtbxNxjBcy29NPpAmLuPVU4vf2a_GCWKXh-5BwZfHvmMqfcbCDgszL_kazjQ2"
+				},
+				"url": {
+					"raw": "https://{{host}}/demo/add",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"demo",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting general list of demos",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "85787db8-875c-40b3-8322-cfdda3a83822",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a4ac70f-55d6-4386-8d0e-fba276537bcf",
+						"exec": [
+							"//1 Correct response format JSON ",
+							"pm.test(\"Correct response format JSON\", function () {",
+							"    pm.response.to.have.jsonBody();",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"X-Powered-By is present\", function () {",
+							"    pm.response.to.have.header(\"X-Powered-By\");",
+							"});",
+							"",
+							"pm.test(\"Strict-Transport-Security is present\", function () {",
+							"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});",
+							"",
+							"pm.test(\"Server is present\", function () {",
+							"    pm.response.to.have.header(\"Server\");",
+							"});",
+							"",
+							"pm.test(\"Transfer-Encoding is present\", function () {",
+							"    pm.response.to.have.header(\"Transfer-Encoding\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/javascript, */*; q=0.01"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8"
+					},
+					{
+						"key": "Origin",
+						"value": "{{Origin}}"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Referer",
+						"value": "{{Referer}}"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "uk,en-US;q=0.9,en;q=0.8"
+					}
+				],
+				"url": {
+					"raw": "https://{{host}}/demo/ResourceSetId/{{ResourceSetId}}",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"demo",
+						"ResourceSetId",
+						"{{ResourceSetId}}"
+					]
+				},
+				"description": "LIST OF DEMOS + THEIR PARAMETERS"
+			},
+			"response": []
+		},
+		{
+			"name": "All fields updating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "09ae6fcd-ef5e-4d41-9b74-7b074442784f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"X-Powered-By is present\", function () {",
+							"    pm.response.to.have.header(\"X-Powered-By\");",
+							"});",
+							"",
+							"pm.test(\"Strict-Transport-Security is present\", function () {",
+							"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});",
+							"",
+							"pm.test(\"Server is present\", function () {",
+							"    pm.response.to.have.header(\"Server\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/javascript, */*; q=0.01"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=UTF-8"
+					},
+					{
+						"key": "Origin",
+						"value": "{{Origin}}"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Referer",
+						"value": "{{Referer}}"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "uk,en-US;q=0.9,en;q=0.8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"ID\":{{ID}},\"Name\":\"{{Name_updated}}\",\"ReachID\":null,\"Population\":null,\"Code\":\"{{Code_updated}}\",\"BuyCode\":\"{{Buy_Code_updated}}\",\"SortOrder\":0,\"Inactive\":false,\"ResourceSetID\":{{ResourceSetId}},\"ImpactFamily\":\"{{Impact_Family_updated}}\",\"CostCode\":\"{{Cost_Code_updated}}\",\"EthnicityID\":12,\"Pop\":null,\"Tag\":null,\"ElementType\":0,\"DatatechCode\":null,\"Ethnicity\":null,\"duplicate\":true}&__RequestVerificationToken=mKrvwMVV2fFiTajNIWNcj1S6nk4gL_ox6DPeddItkd4uiS2TcagniTpJZ_jTEmHAsvPRK84D7hMxea0qy6GAzsWALoFtbxNxjBcy29NPpAmLuPVU4vf2a_GCWKXh-5BwZfHvmMqfcbCDgszL_kazjQ2"
+				},
+				"url": {
+					"raw": "https://{{host}}/demo/update",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"demo",
+						"update"
+					]
+				},
+				"description": "Updating fields "
+			},
+			"response": []
+		},
+		{
+			"name": "Getting general list of demos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fee96055-c7cc-4a73-b0b7-5b7cd649b62b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"items\": {",
+							"    \"type\": \"boolean\"",
+							"  }",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, false];",
+							"",
+							"pm.test('Schema is valid', function() {",
+							"  pm.expect(tv4.validate(data1, schema)).to.be.true;",
+							"  pm.expect(tv4.validate(data2, schema)).to.be.true;",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"X-Powered-By is present\", function () {",
+							"    pm.response.to.have.header(\"X-Powered-By\");",
+							"});",
+							"",
+							"pm.test(\"Strict-Transport-Security is present\", function () {",
+							"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});",
+							"",
+							"pm.test(\"Server is present\", function () {",
+							"    pm.response.to.have.header(\"Server\");",
+							"});",
+							"",
+							"pm.test(\"Transfer-Encoding is present\", function () {",
+							"    pm.response.to.have.header(\"Transfer-Encoding\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/javascript, */*; q=0.01"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8"
+					},
+					{
+						"key": "Origin",
+						"value": "{{Origin}}"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Referer",
+						"value": "{{Referer}}"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "uk,en-US;q=0.9,en;q=0.8"
+					}
+				],
+				"url": {
+					"raw": "https://{{host}}/demo/ResourceSetId/{{ResourceSetId}}",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"demo",
+						"ResourceSetId",
+						"{{ResourceSetId}}"
+					]
+				},
+				"description": "List of Demos + paramaters"
+			},
+			"response": []
+		},
+		{
+			"name": "Demo's deleting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c7c05560-6f46-42e3-89d8-bfc55ab8458f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"items\": {",
+							"    \"type\": \"boolean\"",
+							"  }",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, false];",
+							"",
+							"pm.test('Schema is valid', function() {",
+							"  pm.expect(tv4.validate(data1, schema)).to.be.true;",
+							"  pm.expect(tv4.validate(data2, schema)).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"true\");",
+							"    ",
+							"    ",
+							"});pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"X-Powered-By is present\", function () {",
+							"    pm.response.to.have.header(\"X-Powered-By\");",
+							"});",
+							"",
+							"pm.test(\"Strict-Transport-Security is present\", function () {",
+							"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});",
+							"",
+							"pm.test(\"Server is present\", function () {",
+							"    pm.response.to.have.header(\"Server\");",
+							"});",
+							"",
+							"pm.test(\"Transfer-Encoding is present\", function () {",
+							"    pm.response.to.have.header(\"Transfer-Encoding\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/javascript, */*; q=0.01"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=UTF-8"
+					},
+					{
+						"key": "Origin",
+						"value": "{{Origin}}"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Referer",
+						"value": "{{Referer}}"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "uk,en-US;q=0.9,en;q=0.8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "__RequestVerificationToken=mKrvwMVV2fFiTajNIWNcj1S6nk4gL_ox6DPeddItkd4uiS2TcagniTpJZ_jTEmHAsvPRK84D7hMxea0qy6GAzsWALoFtbxNxjBcy29NPpAmLuPVU4vf2a_GCWKXh-5BwZfHvmMqfcbCDgszL_kazjQ2"
+				},
+				"url": {
+					"raw": "https://{{host}}/demo/destroy/{{ID}}",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"demo",
+						"destroy",
+						"{{ID}}"
+					]
+				},
+				"description": "Demo Deleting"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting general list of demos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a398b6cf-387a-49c1-a4bd-7faa652dbefb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"items\": {",
+							"    \"type\": \"boolean\"",
+							"  }",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, false];",
+							"",
+							"pm.test('Schema is valid', function() {",
+							"  pm.expect(tv4.validate(data1, schema)).to.be.true;",
+							"  pm.expect(tv4.validate(data2, schema)).to.be.true;",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"pm.test(\"X-Powered-By is present\", function () {",
+							"    pm.response.to.have.header(\"X-Powered-By\");",
+							"});",
+							"",
+							"pm.test(\"Strict-Transport-Security is present\", function () {",
+							"    pm.response.to.have.header(\"Strict-Transport-Security\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});",
+							"",
+							"pm.test(\"Server is present\", function () {",
+							"    pm.response.to.have.header(\"Server\");",
+							"});",
+							"",
+							"pm.test(\"Transfer-Encoding is present\", function () {",
+							"    pm.response.to.have.header(\"Transfer-Encoding\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Origin",
+						"value": "{{Origin}}"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Referer",
+						"value": "{{Referer}}"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "uk,en-US;q=0.9,en;q=0.8"
+					}
+				],
+				"url": {
+					"raw": "https://{{host}}/demo/ResourceSetId/{{ResourceSetId}}",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"demo",
+						"ResourceSetId",
+						"{{ResourceSetId}}"
+					]
+				},
+				"description": "List of Demos (Verifyng that deleted item is missing)"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f536ecf8-e775-40f9-b458-321edefd5899",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c7cf4fb3-75fd-4b50-9fe5-65c54e87fd52",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
