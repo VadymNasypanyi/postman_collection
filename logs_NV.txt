@@ -1,0 +1,21 @@
+2020-04-20 16:40:01.666 +03:00 [INF] Here we go again
+2020-04-20 16:40:01.754 +03:00 [INF] First block of Asserts is passed
+2020-04-20 16:40:02.345 +03:00 [INF] Second block of Asserts is passed
+2020-04-20 16:40:06.035 +03:00 [INF] Login process is executed successfully! Time is "2020-04-20T16:40:06.0339001+03:00"
+2020-04-20 16:40:06.039 +03:00 [INF] Test method has been executed. Switching to the next one!
+2020-04-20 16:40:06.105 +03:00 [INF] Third block of Asserts is passed
+2020-04-20 16:40:07.349 +03:00 [INF] Forth block of Asserts is passed
+2020-04-20 16:40:13.018 +03:00 [INF] Repository is created successfully! Time is "2020-04-20T16:40:13.0188844+03:00"
+2020-04-20 16:40:15.020 +03:00 [INF] Test method has been executed. Switching to the next one!
+2020-04-20 16:40:15.093 +03:00 [INF] Fifth block of Asserts is passed
+2020-04-20 16:40:16.263 +03:00 [INF] Sixth block of Asserts is passed
+2020-04-20 16:40:21.976 +03:00 [INF] File Creation process is executed successfully! Time is "2020-04-20T16:40:21.9765970+03:00"
+2020-04-20 16:40:21.976 +03:00 [INF] Test method has been executed. Switching to the next one!
+2020-04-20 16:40:22.053 +03:00 [INF] Seventh block of Asserts is passed
+2020-04-20 16:40:23.739 +03:00 [INF] Eighth block of Asserts is passed
+2020-04-20 16:40:28.072 +03:00 [INF] Repository Deleting process is executed successfully! Time is "2020-04-20T16:40:28.0720824+03:00"
+2020-04-20 16:40:28.072 +03:00 [INF] Test method has been executed. Switching to the next one!
+2020-04-20 16:40:29.494 +03:00 [INF] Logout process is executed successfully! Time is "2020-04-20T16:40:29.4947063+03:00"
+2020-04-20 16:40:29.503 +03:00 [INF] Final block of Asserts is passed. User is located on the Main screen
+2020-04-20 16:40:29.503 +03:00 [INF] Test method has been executed. Switching to the next one!
+2020-04-20 16:40:29.631 +03:00 [INF] Test Suite has been executed!
